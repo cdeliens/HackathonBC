@@ -1,1 +1,5 @@
-app.js.coffescript
+
+//Init Grid
+$ ->
+  $container = $("#container")
+  $container.isotope itemSelector: ".element"
