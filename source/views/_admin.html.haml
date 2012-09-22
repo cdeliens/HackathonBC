@@ -1,4 +1,4 @@
-.row.black
+.row
   .navbar.navbar-fixed-top
     .navbar-inner
       %a.brand{:href => "#"} 
@@ -10,38 +10,34 @@
         %li
           %a{id: "reload", :href => "/"} Reload App
 .container
-  .row-fluid
-    .container
+  .row
+    %form
+    .span6
+      %h1 Setup Query:
+      %p
+        Submit a query
       .row
-        .row
-          %form
-          .span6
-            %h1 SetupQuery:
+        .span
+          %input{id: "query", :placeholder => "Eyewear", :type => "text"}
+        .span1
+          %button.btn.btn-primary{id: "query-submit", :type => "submit"} Submit
+      .row
+        .span
+          #saved-query
             %p
-              Submit a query
-            .row
-              .span
-                %input{id: "query", :placeholder => "Eyewear", :type => "text"}
-              .span1
-                %button.btn.btn-primary{id: "query-submit", :type => "submit"} Submit
-            .row
-              .span
-                #saved-query
-                  %p
-          .span6
-            %h1
-              Instructions:
-            .span
-              %h3 1 - Setup a Query
-              %h3 2 - Reload App
-        .hr
-        .row
-          .span6
-            %hr
-              %h1
-                Shortcuts:
-              .span
-                %h3
-                  ctrl + a = Toggle between Admin and BC App
-                %h3
-                  ctrl + q = Clean Local Storage
+    .span6
+      %h1
+        Instructions:
+      %h3 1 - Setup a Query
+      %h3 2 - Reload App
+  .hr
+  .row
+    .span6
+      %hr
+        %h1
+          Shortcuts:
+
+        %h3
+          ctrl + a = Toggle between Admin and BC App
+        %h3
+          ctrl + q = Clean Local Storage
