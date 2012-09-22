@@ -9,6 +9,10 @@ jQuery ->
     # admin_init()
 
 
+  key 'ctrl+q', ->
+    localStorage.clear()
+    window.location.href = "/"
+
   key 'ctrl+a', ->
     toogle_admin()
 
