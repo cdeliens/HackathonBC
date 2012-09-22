@@ -5,7 +5,7 @@ jQuery ->
   window.toogle_admin = ->
     $("#main-block").toggle()
     $("#admin").toggle()
-    admin_init()
+    # admin_init()
 
 
   key 'ctrl+a', ->
