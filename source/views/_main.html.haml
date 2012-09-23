@@ -6,22 +6,10 @@
       #filters
         %ul.nav.nav-list.affix
           %li.active
-            %a{:href => "#!/all"}
-              %i.icon-chevron-right
+            %a{:href => "#!/all", "data-filter" => ".element"}
               All
-          %li
-            %a{:href => "#!/gender"}
-              %i.icon-chevron-right
-              Gender
-            %ul
-              %li
-                %a{:href => "#!/gender/male"}
-                  %i.icon-chevron-right
-                  Male
-              %li
-                %a{:href => "#!/gender/female"}
-                  %i.icon-chevron-right
-                  Female
+          
+
           
 
             

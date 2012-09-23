@@ -4,7 +4,6 @@
 
   context.initApp = ->
     context.getProducts()
-    context.initFilters()
 
   
   context.clickElementsHandler = ->
@@ -77,7 +76,7 @@
       error: (xhr, status, error) ->
         console.error error
       success: (json) ->
-        console.dir json
+        #console.dir json
         context.handleProduct json
 
 
@@ -85,27 +84,59 @@
   context.populateGrid = (products) ->
     #console.log products
 
-    #init template
-    source = $("#item-template").html()
-    template = Handlebars.compile(source)
+    #init templates
+    itemSource = $("#item-template").html()
+    itemTemplate = Handlebars.compile( itemSource )
 
-    #generate items html and populate the grid
+    filterSource = $("#filter-template").html()
+    filterTemplate = Handlebars.compile( filterSource )
+
+    #generate items html, filters html and populate the grid
     itemsHTML = ""
-    $.each products, ->
-      itemsHTML += template(this)
+    filtersHTML = ""
+    brands = {}
 
-    $grid = $("#grid")
+    $.each products, ->
+      #console.log this
+      brands[''+@brand] = {"brand": @brand, "brandName": @brandName}
+      itemsHTML += itemTemplate(@)
+
+    context.$grid = $grid = $("#grid")
     $grid.html itemsHTML
     #console.log itemsHTML
     $grid.imagesLoaded ->
-      $grid.isotope (itemSelector: ".element"), context.clickElementsHandler
- 
 
-  context.initFilters = ->
+      $grid.isotope (itemSelector: ".element"), context.clickElementsHandler
+      $grid.find(".element").each ->
+        $(@).addClass($(@).data("category"))
+
+    context.initFilters brands
+
+
+  context.initFilters = ( brands ) ->
+    console.log "initFilters"
+
+   # console.dir brands
+
+    #init templates
+    filterSource = $("#filter-template").html()
+    filterTemplate = Handlebars.compile( filterSource )
+
+    #filters html
+    filtersHTML = ""
+
+    $.each brands, ->
+      #console.log this
+      filtersHTML += filterTemplate(@)
+
+    $("#filters > ul ").append( filtersHTML )
+    
     $filterCategories =  $("#filters  > ul > li")
-    $filterCategories.on "click", (event) ->
-      $filterCategories.filter(".active").not(this).removeClass("active").find("ul").slideUp(500)
-      $(this).addClass("active").find("ul").slideDown(500)  
+    $filterCategories.find("> a").on "click", (event) ->
+      selector = $(this).attr("data-filter")
+      context.$grid.isotope filter: selector
+      $filterCategories.filter(".active").not(this).removeClass("active").find("ul").slideUp()
+      $(this).parent().addClass("active").find("ul").slideDown()  
 
   $ context.initApp
 ) window.BCApp = window.BCApp or {}, jQuery, undefined
