@@ -1,6 +1,7 @@
 /* 
-  *= require libs/bootstrap
   *= require normalize
+  *= require libs/bootstrap
+  *= require libs/isotope_style
   *= require main
 */
 

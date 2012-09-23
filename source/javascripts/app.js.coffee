@@ -46,8 +46,9 @@
         console.error error
       success: (json) ->
         console.dir json
+        #console.dir json
+        context.populateGrid json.products
 
-  
   context.getProduct = (id) ->
     $.ajax
       url: window.getProductUrl + id
@@ -59,13 +60,26 @@
         console.dir json
         context.handleProduct json
 
-  context.populateGrid = (products) ->
-    console.log products
 
-    $container = $("#grid")
-    $container.isotope itemSelector: ".element"
+  context.populateGrid = (products) ->
+    #console.log products
+
+    #init template
+    source = $("#item-template").html()
+    template = Handlebars.compile(source)
+
+    #generate items html and populate the grid
+    itemsHTML = ""
+    $.each products, ->
+      itemsHTML += template(this)
+
+    $grid = $("#grid")
+    $grid.html itemsHTML
+    #console.log itemsHTML
+    $grid.imagesLoaded ->
+      $grid.isotope itemSelector: ".element"
  
-  $ context.init
+  $ context.getProducts
 ) window.BCApp = window.BCApp or {}, jQuery, `undefined`
 
 jQuery ->
