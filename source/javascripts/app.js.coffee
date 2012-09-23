@@ -41,7 +41,7 @@
 
     $("#detail #features").html( featuresHTML )
     $("#detail #slideshow > ul").html( imagesHTML )
-    new Swipe(document.getElementById('slideshow'));
+    window.mySwipe = new Swipe(document.getElementById('slideshow'));
 
   context.clickElementsHandler = ->
     $("#grid .element").on "click", (event) ->

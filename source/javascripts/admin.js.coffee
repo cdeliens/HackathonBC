@@ -15,6 +15,10 @@ jQuery ->
   key 'ctrl+alt+c', ->
     $("#main-block").show()
     $("#admin").hide()
+  key 'ctrl+b', ->
+    window.mySwipe.prev()
+  key 'ctrl+n', ->
+    window.mySwipe.next()
 
   $("#clean").on "click", (event) ->
     localStorage.clear()
