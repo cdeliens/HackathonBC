@@ -1,9 +1,16 @@
 ((context, $, undef) ->
 
 
+
   context.initApp = ->
     context.getProducts()
     context.initFilters()
+
+  
+  context.clickElementsHandler = ->
+    $("#grid .element").on "click", (event) ->
+      sku = $(this).data("sku")
+      window.BCApp.getProduct sku
 
   context.templateLoader = (id, obj) ->
     template_id = $(id)
@@ -22,7 +29,7 @@
 
 
   context.appendToDetail = (el) ->
-    $("#grid").fadeOut()
+    $("#420block").fadeOut()
     detail = $("#detail")
     detail.empty()
     detail.fadeIn "slow", ->
@@ -46,8 +53,11 @@
     $("#detail #features").html( featuresHTML )
     $("#detail #slideshow").html( imagesHTML )
     cycleProducts($("#detail #slideshow"))
+    window.detail_binds
 
-  context.getProducts = ->
+
+
+  context.getProducts =  ->
     $.ajax
       url: window.searchUrl
       type: "GET"
@@ -71,6 +81,7 @@
         context.handleProduct json
 
 
+
   context.populateGrid = (products) ->
     #console.log products
 
@@ -87,7 +98,7 @@
     $grid.html itemsHTML
     #console.log itemsHTML
     $grid.imagesLoaded ->
-      $grid.isotope itemSelector: ".element"
+      $grid.isotope (itemSelector: ".element"), context.clickElementsHandler
  
 
   context.initFilters = ->
@@ -102,4 +113,6 @@
 jQuery ->
   if localStorage.query == undefined
     toogle_admin()
+  
+
 

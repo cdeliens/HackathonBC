@@ -9,3 +9,9 @@ window.cycleProducts = (e) ->
     pager:  '.pager'
     pagerEvent: "click"
 
+  window.detail_binds = ->
+    $("#back a").on "click", (event) ->
+      $("#detail").toggle()
+      $("#detail").empty()
+      $("#420block").fadeIn()
+
