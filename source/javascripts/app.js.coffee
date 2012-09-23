@@ -3,12 +3,30 @@
   context.initApp = ->
     context.getProducts()
 
+    #listen to tab event on img
+    $("#detail-subnav > a").live "click",  ->
+      console.log "img click"
+      $this = $(@)
+      if $(this).is("#showMask")
+        $("#transparency").fadeIn "fast"
+        $("#comments").slideUp 200, ->
+             $("#mask").slideDown 300
+      else
+        if $(this).is("#showComments")
+          $("#transparency").fadeIn "fast"
+          $("#mask").slideUp 200, ->
+             $("#comments").slideDown 300
+        else
+          $("#mask, #comments").slideUp 200
+          $("#transparency").fadeOut 300
+          
+      
+     
+
   context.eightamhack =  ->
-    console.log "eightamhack" 
     json = JSON.parse( localStorage.jsonResult )
-    console.log json  
-  
-    #console.dir json
+    console.dir json
+
     featuresHTML = ''
     for feature in json.features
       featuresHTML+= context.templateLoader("#detail-feature-template", feature)
@@ -36,12 +54,6 @@
       $("#detail").empty()
       $("#420block").fadeIn()
       $(this).unbind('click')
-
-    #show Detail text
-    $("#slideshow > ul li img ").live "swipeDown",  ->
-      console.log "swipeDown"
-      $("#transparency").fadeIn("fast")
-      $("#mask").slideDown(300)
 
   context.templateLoader = (id, obj) ->
     template_id = $(id)

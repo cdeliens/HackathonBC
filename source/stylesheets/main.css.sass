@@ -47,11 +47,12 @@ body.bc-app
 #grid
   border: 0px
 #main-block
-  padding-top: 70px
+  padding-top: 65px
   .isotope-item
     text-align: center
     width: 217px
     margin: 5px
+    cursor: pointer
     img
       width: 200px 
 
@@ -94,6 +95,7 @@ body.bc-app
         padding: 8px 14px
         border: 1px solid #e5e5e5
         text-decoration: none
+        cursor: pointer
 
 
     
@@ -133,7 +135,23 @@ body.bc-app
     margin: 0 auto
     padding-bottom: 20px
 
-$imgHeight : 450px
+$imgHeight : 420px
+
+#detail-subnav
+  display: block
+  text-align: center
+  padding-top: 15px
+  a
+    font-family: "Futura-bold"
+    font-size: 14px
+    font-weight: normal
+    text-transform: uppercase
+    padding: 0 10px
+    color : #333
+    text-decoration: none
+    cursor: pointer
+    &.active
+      color: #005695
 
 #detail-wrapper
   position: relative
@@ -144,7 +162,7 @@ $imgHeight : 450px
       li
         height: $imgHeight
 
-  #mask, #transparency
+  #mask, #transparency, #comments
     position: absolute
     top: 0
     width: 800px
@@ -154,7 +172,7 @@ $imgHeight : 450px
     opacity: .6
     background: #fff
     left: 0
-  #mask
+  #mask, #comments
     left: 0
     opacity: 1
     background: transparent

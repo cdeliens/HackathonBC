@@ -10,6 +10,7 @@
           %ul
         .brand
           {{{ image_tag brandImage}}}
+
         #transparency
         #mask
           .row
@@ -24,9 +25,33 @@
                   %h2 
                     Features
                   %ul#features
+        #comments
+          .row
+            .span10
+              %h2 
+                Comments
+                %h5
+                  Juan Carlos Perez
+                %p
+                  I always prefer a bib to regular pants. These are a thin shell with good venting that do the job. Fit is regular/technical, not baggy, pockets in bib top are handy. 
+                  You'll need a layer underneath on cold days. 
+                  I'm 5'9" and about 140lbs with a 30" leg and small was about right.
+                %h5
+                  Stacey Smith
+                %p
+                  Really cool pants, love the color! They're super comfy, and after a couple of trips, I can say that they're weatherproof! The bib-piece works good, and the remove option is just great (don't underestimate this) Only con: Velcro adjustment around hips seems to be a little sloppy.
+
+
     .row
-      .span
-        #back
-          %a
-            =image_tag "/images/back.png"
+      #detail-subnav
+        %a#showPictures
+          pictures
+        %a#showMask 
+          details
+        %a#showComments
+          comments
+    .row
+      #back
+        %a
+          =image_tag "/images/back.png"
 
