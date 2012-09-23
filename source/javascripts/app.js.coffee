@@ -1,4 +1,10 @@
 ((context, $, undef) ->
+
+  context.appendToDetail = (el) ->
+    detail = $("#detail")
+    detail.empty()
+    detail.append(el)
+
   context.getProducts = ->
     $.ajax
       url: window.searchUrl
