@@ -7,16 +7,27 @@
       error: (xhr, status, error) ->
         console.error error
       success: (json) ->
-        console.dir json
+        #console.dir json
         context.populateGrid json.products
 
   context.populateGrid = (products) ->
-    console.log products
+    #console.log products
 
-    $container = $("#grid")
-    $container.isotope itemSelector: ".element"
+    #init template
+    source = $("#item-template").html()
+    template = Handlebars.compile(source)
+
+    #generate items html and populate the grid
+    itemsHTML = ""
+    $.each products, ->
+      itemsHTML += template(this)
+
+    $grid = $("#grid")
+    $grid.html itemsHTML
+    $grid.imagesLoaded ->
+      $grid.isotope itemSelector: ".element"
  
-  $ context.init
+  $ context.getProducts
 ) window.BCApp = window.BCApp or {}, jQuery, `undefined`
 
 jQuery ->
