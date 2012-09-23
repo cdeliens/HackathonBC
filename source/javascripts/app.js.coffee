@@ -58,8 +58,10 @@
       imagesHTML+= context.templateLoader("#detail-image-slide-template", obj)
 
     $("#detail #features").html( featuresHTML )
-    $("#detail #slideshow").html( imagesHTML )
-    cycleProducts($("#detail #slideshow"))
+    #$("#detail #slideshow > ul").html( imagesHTML )
+    new Swipe(document.getElementById('slideshow'));
+
+    #cycleProducts($("#detail #slideshow"))
 
 
   context.getProducts =  ->
@@ -80,7 +82,7 @@
       error: (xhr, status, error) ->
         console.error error
       success: (json) ->
-        #console.dir json
+        console.dir json
         context.handleProduct json
 
 

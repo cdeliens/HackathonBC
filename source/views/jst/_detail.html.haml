@@ -5,14 +5,20 @@
         %h1
           {{{ title }}}
     .row
-      .span.relative
-        .slide_pager#prev
-          <
-        #slideshow.span10
-        .slide_pager#next
-          >
-        .brand
-          {{{ image_tag brandImage}}}
+      #slideshow.swipe
+        %ul
+          %li{:style => "display:block"}
+            %div 1
+          %li{:style => "display:none"}
+            %div 2
+          %li{:style => "display:none"}
+            %div 3
+          %li{:style => "display:none"}
+            %div 4
+          %li{:style => "display:none"}
+            %div 5
+      .brand
+        {{{ image_tag brandImage}}}
     .row
       .span10
         .row
@@ -25,7 +31,7 @@
             %h2 
               Features
             %ul#features
-            
+
     .row
       .span
         %ul.pager
