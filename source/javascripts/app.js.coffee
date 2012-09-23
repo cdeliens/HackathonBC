@@ -50,9 +50,8 @@
 
     #back button functinality
     $("#back a").live "click", (event) ->
-      $("#detail").fadeOut()
-      $("#detail").empty()
-      $("#420block").fadeIn()
+      $("#detail").fadeOut("fast").empty()
+      $("#420block").fadeIn("fast")
       $(this).unbind('click')
 
   context.templateLoader = (id, obj) ->
@@ -72,9 +71,9 @@
 
 
   context.appendToDetail = (el) ->
-    $("#420block").fadeOut()
+    $("#420block").fadeOut(300)
     detail = $("#detail")
-    detail.fadeIn "slow", ->
+    detail.fadeIn 300, ->
       $(@).html(el)
       context.eightamhack()
 
@@ -132,9 +131,12 @@
     #console.log itemsHTML
     $grid.imagesLoaded ->
 
-      $grid.isotope (itemSelector: ".element"), context.clickElementsHandler
-      $grid.find(".element").each ->
-        $(@).addClass($(@).data("category"))
+      $grid.isotope (itemSelector: ".element"),  ->
+        context.clickElementsHandler
+    
+        $grid.find(".element").each ->
+          $(@).addClass($(@).data("category")).fadeIn 300
+
 
     context.initFilters brands
 
@@ -159,9 +161,11 @@
     $filterCategories =  $("#filters  > ul > li")
     $filterCategories.find("> a").on "click", (event) ->
       selector = $(this).attr("data-filter")
+      $filterCategories.filter(".active").not(this).removeClass("active")
+      $(this).parent().addClass("active")
       context.$grid.isotope filter: selector
-      $filterCategories.filter(".active").not(this).removeClass("active").find("ul").slideUp()
-      $(this).parent().addClass("active").find("ul").slideDown()  
+      
+      
 
   $ context.initApp
 ) window.BCApp = window.BCApp or {}, jQuery, undefined
