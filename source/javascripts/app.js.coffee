@@ -153,7 +153,7 @@
 ) window.BCApp = window.BCApp or {}, jQuery, undefined
 
 window.updateLayout = ->
-  if window.innerWidth < 1300
+  if window.innerWidth < 1250
     if(window.innerHeight > window.innerWidth)
       $("#main-block").hide()
       $("#admin").slideDown("slow")
