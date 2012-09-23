@@ -1,14 +1,23 @@
 ((context, $, undef) ->
   context.getProducts = ->
     $.ajax
-      url: window.search_url
+      url: window.searchUrl
       type: "GET"
       dataType: "jsonp"
       error: (xhr, status, error) ->
         console.error error
       success: (json) ->
         console.dir json
-        context.populateGrid json.products
+  
+  context.getProduct = (id) ->
+    $.ajax
+      url: window.getProductUrl + id
+      type: "GET"
+      dataType: "jsonp"
+      error: (xhr, status, error) ->
+        console.error error
+      success: (json) ->
+        console.dir json
 
   context.populateGrid = (products) ->
     console.log products
