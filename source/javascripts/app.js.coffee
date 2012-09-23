@@ -1,11 +1,5 @@
 ((context, $, undef) ->
 
-  # window.create_product_images = (result) ->
-  #   images = result.detailImages
-
-  #     for  image in images
-  #       image.
-
   context.templateLoader = (id, obj) ->
     template_id = $(id)
     source   = template_id.html()
@@ -16,26 +10,37 @@
     {
       title:  result.title
       fullDescription: result.fullDescription
-      brand_image: result.brandImage
-      price: result.skus.listPrice
-      sale_price: result.skus.salePrice
-      size: result.skus.size
-      color: result.skus.color
+      brandImage: result.brandImage
       productGroup: result.productGroup
       bottomLine: result.bottomLine
-      # mainImage: result.skus.images.900
-      }
-      
+      mainImage: result.detailImages[0]["900Url"]
+    }
 
   context.appendToDetail = (el) ->
+    $("#grid").fadeOut()
     detail = $("#detail")
     detail.empty()
-    detail.append(el)
+    detail.fadeIn "slow", ->
+      $(this).append(el)
 
   context.handleProduct = (json) ->
     productObj = context.createProductObject json
     html = context.templateLoader "#detail-template", productObj
     context.appendToDetail(html)
+
+    featuresHTML = ''
+    for feature in json.features
+      featuresHTML+= context.templateLoader("#detail-feature-template", feature)
+    
+    imagesHTML = ''
+    for obj in json.detailImages
+      obj.nov = obj["900Url"]
+      delete obj["900Url"]
+      imagesHTML+= context.templateLoader("#detail-image-slide-template", obj)
+
+    $("#detail #features").html( featuresHTML )
+    $("#detail #slideshow").html( imagesHTML )
+    cycleProducts($("#detail #slideshow"))
 
   context.getProducts = ->
     $.ajax
@@ -79,9 +84,10 @@
     $grid.imagesLoaded ->
       $grid.isotope itemSelector: ".element"
  
-  $ context.getProducts
+  # $ context.getProducts
 ) window.BCApp = window.BCApp or {}, jQuery, `undefined`
 
 jQuery ->
   if localStorage.query == undefined
     toogle_admin()
+  BCApp.getProduct("COL3648")
