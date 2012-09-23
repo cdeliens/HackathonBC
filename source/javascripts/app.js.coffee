@@ -5,7 +5,23 @@
   context.initApp = ->
     context.getProducts()
 
-  
+  context.eightamhack = (json) ->
+    featuresHTML = ''
+    for feature in json.features
+      featuresHTML+= context.templateLoader("#detail-feature-template", feature)
+    imagesHTML = '' 
+    if !$.isEmptyObject(json.detailImages)  && !(json.detailImages[0]["900Url"] == "")
+      for obj in json.detailImages
+        obj.nov = obj["900Url"] or ""
+        delete obj["900Url"]
+        imagesHTML+= context.templateLoader("#detail-image-slide-template", obj)
+    else
+        imagesHTML+= context.templateLoader("#detail-image-slide-template", {nov: "/images/404.png"})
+
+    $("#detail #features").html( featuresHTML )
+    $("#detail #slideshow > ul").html( imagesHTML )
+    new Swipe(document.getElementById('slideshow'));
+
   context.clickElementsHandler = ->
     $("#grid .element").on "click", (event) ->
       sku = $(this).data("sku")
@@ -13,8 +29,13 @@
     #back button functinality
     $("#back a").live "click", (event) ->
       $("#detail").fadeOut()
+      $("#detail").empty()
       $("#420block").fadeIn()
-      $(this).unbind('click');
+      $(this).unbind('click')
+
+    
+
+  
 
   context.templateLoader = (id, obj) ->
     template_id = $(id)
@@ -35,30 +56,16 @@
   context.appendToDetail = (el) ->
     $("#420block").fadeOut()
     detail = $("#detail")
-    detail.empty()
     detail.fadeIn "slow", ->
-      $(this).append(el)
+      $(@).html(el)
+      context.eightamhack(JSON.parse(localStorage.jsonResult))
 
   context.handleProduct = (json) ->
     productObj = context.createProductObject json
     html = context.templateLoader "#detail-template", productObj
     context.appendToDetail(html)
+    localStorage.jsonResult = JSON.stringify(json)
 
-    featuresHTML = ''
-    for feature in json.features
-      featuresHTML+= context.templateLoader("#detail-feature-template", feature)
-    imagesHTML = '' 
-    if !$.isEmptyObject(json.detailImages)  
-      for obj in json.detailImages
-        obj.nov = obj["900Url"] or ""
-        delete obj["900Url"]
-        imagesHTML+= context.templateLoader("#detail-image-slide-template", obj)
-    else
-        imagesHTML+= context.templateLoader("#detail-image-slide-template", {nov: "images/404.png"})
-
-    $("#detail #features").html( featuresHTML )
-    $("#detail #slideshow > ul").html( imagesHTML )
-    new Swipe(document.getElementById('slideshow'));
 
 
 
@@ -80,8 +87,8 @@
       error: (xhr, status, error) ->
         console.error error
       success: (json) ->
-        console.dir json
         context.handleProduct json
+        
 
 
 
@@ -144,9 +151,16 @@
   $ context.initApp
 ) window.BCApp = window.BCApp or {}, jQuery, undefined
 
+window.updateLayout = ->
+  if(window.innerHeight > window.innerWidth)
+    $("#main-block").hide()
+    $("#admin").slideDown("slow")
+  else
+    $("#main-block").show()
+    $("#admin").hide()
+
 jQuery ->
-  if localStorage.query == undefined
-    toogle_admin()
+  setInterval(window.updateLayout, 400);
   
 
 

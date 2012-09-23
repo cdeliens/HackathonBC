@@ -1,21 +1,23 @@
 jQuery ->
 
-  window.admin_init= ->
-
-
-  window.toogle_admin = ->
+  window.toogleAdmin = ->
     $("#main-block").toggle()
     $("#admin").toggle()
-    # admin_init()
 
 
   key 'ctrl+q', ->
     localStorage.clear()
     window.location.href = "/"
 
-  key 'ctrl+a', ->
-    toogle_admin()
+  key 'ctrl+alt+a', ->
+    $("#main-block").hide()
+    $("#admin").slideDown("slow")
+  key 'ctrl+alt+c', ->
+    $("#main-block").show()
+    $("#admin").hide()
 
+  $("#clean").on "click", (event) ->
+    localStorage.clear()
   $("#query-submit").on "click", (event) ->
     query = $("#query").val()
     localStorage.query = query

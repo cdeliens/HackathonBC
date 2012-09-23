@@ -4,7 +4,7 @@
       .span
         %h1
           {{{ title }}}
-    .row
+    .row.slideshow_container
       #slideshow.swipe
         %ul
       .brand
@@ -24,8 +24,7 @@
 
     .row
       .span
-        %ul.pager
-          %li#back
-            %a
-              Back
+        #back
+          %a
+            =image_tag "/images/back.png"
 
