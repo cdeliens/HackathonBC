@@ -5,34 +5,37 @@
 
   #     for  image in images
   #       image.
-  
-  window.template_loader = (id, obj) ->
+
+  context.templateLoader = (id, obj) ->
     template_id = $(id)
     source   = template_id.html()
     template = Handlebars.compile(source)
     html = template(obj)
 
-  window.create_product_object = (result) ->
-      product = {
-        title:  result.title
-        full_description : result.fullDescription
-        brand_image : result.brandImage
-        price: result.skus.listPrice
-        sale_price: result.skus.salePrice
-        size: result.skus.size
-        color: result.skus.color
-        productGroup: result.productGroup
-        bottomLine: result.bottomLine
-       # main_image: result.skus.images.900
+  context.createProductObject = (result) ->
+    {
+      title:  result.title
+      fullDescription: result.fullDescription
+      brand_image: result.brandImage
+      price: result.skus.listPrice
+      sale_price: result.skus.salePrice
+      size: result.skus.size
+      color: result.skus.color
+      productGroup: result.productGroup
+      bottomLine: result.bottomLine
+      # mainImage: result.skus.images.900
       }
-      template_loader obj
-      obj = $.extend(text, author, media);
-      template_loader obj
+      
 
   context.appendToDetail = (el) ->
     detail = $("#detail")
     detail.empty()
     detail.append(el)
+
+  context.handleProduct = (json) ->
+    productObj = context.createProductObject json
+    html = context.templateLoader "#detail-template", productObj
+    context.appendToDetail(html)
 
   context.getProducts = ->
     $.ajax
@@ -42,9 +45,10 @@
       error: (xhr, status, error) ->
         console.error error
       success: (json) ->
+        console.dir json
         #console.dir json
         context.populateGrid json.products
-  
+
   context.getProduct = (id) ->
     $.ajax
       url: window.getProductUrl + id
@@ -53,7 +57,9 @@
       error: (xhr, status, error) ->
         console.error error
       success: (json) ->
-        context.populateGrid json.products
+        console.dir json
+        context.handleProduct json
+
 
   context.populateGrid = (products) ->
     #console.log products
