@@ -1,8 +1,7 @@
 ((context, $, undef) ->
-  context.init = ->
-    #load data from API
+  context.getProducts = ->
     $.ajax
-      url: "http://hackathon.backcountry.com/hackathon/public/search?q=%22eyewear%22"
+      url: window.search_url
       type: "GET"
       dataType: "jsonp"
       error: (xhr, status, error) ->
@@ -17,7 +16,6 @@
     $container = $("#grid")
     $container.isotope itemSelector: ".element"
  
-  #initialize on DOM ready
   $ context.init
 ) window.BCApp = window.BCApp or {}, jQuery, `undefined`
 
