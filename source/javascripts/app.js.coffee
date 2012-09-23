@@ -155,12 +155,13 @@
 ) window.BCApp = window.BCApp or {}, jQuery, undefined
 
 window.updateLayout = ->
-  if(window.innerHeight > window.innerWidth)
-    $("#main-block").hide()
-    $("#admin").slideDown("slow")
-  else
-    $("#main-block").show()
-    $("#admin").hide()
+  if window.innerWidth < 1250
+    if(window.innerHeight > window.innerWidth)
+      $("#main-block").hide()
+      $("#admin").slideDown("slow")
+    else
+      $("#main-block").show()
+      $("#admin").hide()
 
 jQuery ->
   setInterval(window.updateLayout, 400);
