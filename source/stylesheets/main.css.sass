@@ -116,8 +116,33 @@ body.bc-app
               -moz-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1), inset -1px 0 0 rgba(0, 0, 0, 0.1)
               box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1), inset -1px 0 0 rgba(0, 0, 0, 0.1)
 
-#slideshow
-  ul
-    li
-      height: 780px
-      background: #c1c1c1
+$imgHeight : 450px
+
+#detail-wrapper
+  position: relative
+  height: $imgHeight
+  overflow: hidden
+  border: 1px solid red
+  #slideshow
+    ul
+      li
+        height: $imgHeight
+        background: #c1c1c1
+        img
+          height: $imgHeight
+  #mask, #transparency
+    position: absolute
+    top: 0
+    opacity: .3
+    width: 800px
+    height: $imgHeight
+  #transparency
+    opacity: .6
+    background: #fff
+    left: -20px
+  #mask
+    left: 0px  
+    opacity: 1
+    background: transparent
+    .row 
+      padding-top: 20px
