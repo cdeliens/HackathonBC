@@ -47,9 +47,8 @@ body.bc-app
 #grid
   border: 0px
 #main-block
-  padding-top: 100px
+  padding-top: 70px
   .isotope-item
-    border: 1px solid #ccc
     text-align: center
     width: 217px
     margin: 5px
@@ -58,12 +57,15 @@ body.bc-app
 
 #admin
   display: none
-  padding-top: 100px
+  padding-top: 70px
 
 
 /* Sidenav */
 
 #filters
+  .active
+    a
+      color: white !important
   ul
     padding: 0 !important
     background-color: #fff
@@ -78,11 +80,13 @@ body.bc-app
 
     li
       a
+        @include font_builder($font: $baseBoldFontFamily, $size: 14px, $weight: normal, $color: black, $transform: uppercase)
         display: block
         margin: 0 0 -1px
         padding: 8px 14px
         border: 1px solid #e5e5e5
         text-decoration: none
+
 
     
   > 
