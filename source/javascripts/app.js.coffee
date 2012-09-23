@@ -42,7 +42,6 @@
     context.appendToDetail(html)
 
   context.getProducts = ->
-    console.log "get products"
     $.ajax
       url: window.searchUrl
       type: "GET"
