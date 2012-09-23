@@ -20,7 +20,6 @@
   #initialize on DOM ready
   $ context.init
 ) window.BCApp = window.BCApp or {}, jQuery, `undefined`
->>>>>>> feature/main_container
 
 jQuery ->
   if localStorage.query == undefined
