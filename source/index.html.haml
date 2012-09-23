@@ -6,6 +6,7 @@
           Backcountry
 
   =partial '/views/main'
+#detail
 
 #admin
   .row
@@ -16,4 +17,7 @@
 
 %script#grid-template{:type => "text/x-handlebars-template"}
   =partial "/views/jst/grid"
+
+%script#detail-template{:type => "text/x-handlebars-template"}
+  =partial "/views/jst/detail"
 
