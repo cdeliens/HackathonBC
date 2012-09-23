@@ -3,14 +3,14 @@
     .navbar-inner
       .container
         %p 
-          "Backcountry Deliens test"
+          Backcountry
 
-  .row
-    .container 
-      %h1
-        BC - Hackathon
-        .btn.btn-success
-          TEST
+  =partial '/views/main'
 
 #admin
-  = partial "views/admin"
+  .row
+    .container
+      .span
+        = partial "views/admin"
+
+

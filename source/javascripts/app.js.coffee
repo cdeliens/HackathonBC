@@ -1,8 +1,2 @@
-jQuery ->
-
-
-  get_products = ->
-
-
-  if localStorage.query == undefined
-    toogle_admin()
+if localStorage.query == undefined
+  toogle_admin()
