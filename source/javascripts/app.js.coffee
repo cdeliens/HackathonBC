@@ -6,6 +6,10 @@
   #     for  image in images
   #       image.
 
+  context.initApp = ->
+    context.getProducts()
+    context.initFilters()
+
   context.templateLoader = (id, obj) ->
     template_id = $(id)
     source   = template_id.html()
@@ -23,7 +27,7 @@
       color: result.skus.color
       productGroup: result.productGroup
       bottomLine: result.bottomLine
-      # mainImage: result.skus.images.900
+      mainImage: result.skus.images["900"]
       }
       
 
@@ -38,6 +42,7 @@
     context.appendToDetail(html)
 
   context.getProducts = ->
+    console.log "get products"
     $.ajax
       url: window.searchUrl
       type: "GET"
@@ -79,8 +84,14 @@
     $grid.imagesLoaded ->
       $grid.isotope itemSelector: ".element"
  
-  $ context.getProducts
-) window.BCApp = window.BCApp or {}, jQuery, `undefined`
+  context.initFilters = ->
+    $filterCategories =  $("#filters  > ul > li")
+    $filterCategories.on "click", (event) ->
+      $filterCategories.filter(".active").not(this).removeClass("active").find("ul").slideUp(500)
+      $(this).addClass("active").find("ul").slideDown(500)  
+
+  $ context.initApp
+) window.BCApp = window.BCApp or {}, jQuery, undefined
 
 jQuery ->
   if localStorage.query == undefined
