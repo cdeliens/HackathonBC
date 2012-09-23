@@ -137,6 +137,12 @@
         $("#grid .element").on "click", (event) ->
           sku = $(this).data("sku")
           context.getProduct sku
+
+        #back button functinality
+        $("#back a").live "click", (event) ->
+          $("#detail").fadeOut("fast").empty()
+          $("#420block").fadeIn("fast")
+          $(this).unbind('click')
     
         $grid.find(".element").each ->
           $(@).addClass($(@).data("category")).fadeIn 300
