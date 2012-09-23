@@ -1,6 +1,10 @@
 #detail
   #back
+    position: absolute
+    top: 5px
+    left: 1%
     cursor: pointer
+    z-index: 1031
   .relative
     position: relative
   .slide_pager
@@ -23,13 +27,15 @@
     margin-top: 20px
     float: left
     text-align: left
-
+  .slideshow_container
+    position: relative
   #slideshow
-    position: realtive
+    position: relative
     margin: 0px
     height: 780px
     img
       width: 780px
     ul
-      li:first-child
+      li
         display: block !important
+        float: left
