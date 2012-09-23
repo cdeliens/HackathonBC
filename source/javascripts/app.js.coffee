@@ -44,6 +44,7 @@
     window.mySwipe = new Swipe(document.getElementById('slideshow'));
 
   context.clickElementsHandler = ->
+    console.log "hola"
     $("#grid .element").on "click", (event) ->
       sku = $(this).data("sku")
       context.getProduct sku
@@ -132,7 +133,10 @@
     $grid.imagesLoaded ->
 
       $grid.isotope (itemSelector: ".element"),  ->
-        context.clickElementsHandler
+        #context.clickElementsHandler
+        $("#grid .element").on "click", (event) ->
+          sku = $(this).data("sku")
+          context.getProduct sku
     
         $grid.find(".element").each ->
           $(@).addClass($(@).data("category")).fadeIn 300
