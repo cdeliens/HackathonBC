@@ -1,3 +1,33 @@
-.row
-  %h1
-    {{{ title }}}
+.container
+  .span10.offset1
+    .row
+      .span
+        %h1
+          {{{ title }}}
+    .row
+      .span.relative
+        .slide_pager#prev
+          <
+        #slideshow.span10
+        .slide_pager#next
+          >
+        .brand
+          {{{ image_tag brandImage}}}
+    .row
+      .span10
+        .row
+          .span5
+            %h2 
+              Description
+            %p
+              {{{ fullDescription }}}
+          .span5
+            %h2 
+              Features
+            %ul#features
+    .row
+      .span
+        %ul.pager
+          %li
+            =link_to "Back", ""
+
