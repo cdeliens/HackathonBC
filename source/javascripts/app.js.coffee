@@ -8,7 +8,6 @@
 
   context.initApp = ->
     context.getProducts()
-    context.initFilters()
 
   context.templateLoader = (id, obj) ->
     template_id = $(id)
@@ -61,33 +60,61 @@
       error: (xhr, status, error) ->
         console.error error
       success: (json) ->
-        console.dir json
+        #console.dir json
         context.handleProduct json
 
 
   context.populateGrid = (products) ->
     #console.log products
 
-    #init template
-    source = $("#item-template").html()
-    template = Handlebars.compile(source)
+    #init templates
+    itemSource = $("#item-template").html()
+    itemTemplate = Handlebars.compile( itemSource )
 
-    #generate items html and populate the grid
+    filterSource = $("#filter-template").html()
+    filterTemplate = Handlebars.compile( filterSource )
+
+    #generate items html, filters html and populate the grid
     itemsHTML = ""
+    filtersHTML = ""
+    brands = {}
+
     $.each products, ->
-      itemsHTML += template(this)
+      #console.log this
+      brands[''+@brand] = {"brand": @brand, "brandName": @brandName}
+      itemsHTML += itemTemplate(@)
 
     $grid = $("#grid")
     $grid.html itemsHTML
     #console.log itemsHTML
     $grid.imagesLoaded ->
       $grid.isotope itemSelector: ".element"
+
+    context.initFilters brands
+
  
-  context.initFilters = ->
+  context.initFilters = ( brands ) ->
+    console.log "initFilters"
+
+   # console.dir brands
+
+    #init templates
+    filterSource = $("#filter-template").html()
+    filterTemplate = Handlebars.compile( filterSource )
+
+    #filters html
+    filtersHTML = ""
+
+    $.each brands, ->
+      #console.log this
+      filtersHTML += filterTemplate(@)
+
+    $("#filters > ul ").append( filtersHTML )
+
     $filterCategories =  $("#filters  > ul > li")
     $filterCategories.on "click", (event) ->
-      $filterCategories.filter(".active").not(this).removeClass("active").find("ul").slideUp(500)
-      $(this).addClass("active").find("ul").slideDown(500)  
+      $filterCategories.filter(".active").not(this).removeClass("active").find("ul").slideUp()
+      $(this).addClass("active").find("ul").slideDown()  
 
   $ context.initApp
 ) window.BCApp = window.BCApp or {}, jQuery, undefined
