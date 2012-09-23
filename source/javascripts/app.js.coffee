@@ -10,7 +10,6 @@
     $("#grid .element").on "click", (event) ->
       sku = $(this).data("sku")
       context.getProduct sku
-
     #back button functinality
     $("#back a").live "click", (event) ->
       $("#detail").fadeOut()
@@ -50,12 +49,15 @@
      # console.log feature
       featuresHTML+= context.templateLoader("#detail-feature-template", feature)
     
-    imagesHTML = ''
-    for obj in json.detailImages
-      #console.log obj
-      obj.nov = obj["900Url"] or ""
-      delete obj["900Url"]
-      imagesHTML+= context.templateLoader("#detail-image-slide-template", obj)
+    if !$.isEmptyObject(json.detailImages)
+      imagesHTML = ''
+      for obj in json.detailImages
+        #console.log obj
+        obj.nov = obj["900Url"] or ""
+        delete obj["900Url"]
+        imagesHTML+= context.templateLoader("#detail-image-slide-template", obj)
+    else
+        imagesHTML+= context.templateLoader("#detail-image-slide-template", {nov: "images/404.png"})
 
     $("#detail #features").html( featuresHTML )
     $("#detail #slideshow").html( imagesHTML )
