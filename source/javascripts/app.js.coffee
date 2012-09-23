@@ -10,16 +10,21 @@
     $("#grid .element").on "click", (event) ->
       sku = $(this).data("sku")
       context.getProduct sku
+
     #back button functinality
     $("#back a").live "click", (event) ->
       $("#detail").fadeOut()
       $("#420block").fadeIn()
-      $(this).unbind('click');
+      $(this).unbind('click')
+
     #show Detail text
-    $("#slideshow > ul li img ").live "click",  ->
-      console.log "click click"
+    $("#slideshow > ul li img ").live "swipeDown",  ->
+      console.log "swipeDown"
       $("#transparency").fadeIn("fast")
       $("#mask").slideDown(300)
+
+      #
+      swipeDown
 
   context.templateLoader = (id, obj) ->
     template_id = $(id)
