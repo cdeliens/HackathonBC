@@ -1,27 +1,29 @@
 .container
   .span10.offset1
-    .row
-      .span
-        %h1
-          {{{ title }}}
-    .row.slideshow_container
-      #slideshow.swipe
-        %ul
-      .brand
-        {{{ image_tag brandImage}}}
-    .row
-      .span10
-        .row
-          .span5
-            %h2 
-              Description
-            %p
-              {{{ fullDescription }}}
-          .span5
-            %h2 
-              Features
-            %ul#features
+    #title-wrapper
+      %h1
+        {{{ title }}}
 
+    #detail-wrapper
+      .row
+        #slideshow.swipe
+          %ul
+        .brand
+          {{{ image_tag brandImage}}}
+        #transparency
+        #mask
+          .row
+            .span10
+              .row
+                .span5
+                  %h2 
+                    Description
+                  %p
+                    {{{ fullDescription }}}
+                .span5
+                  %h2 
+                    Features
+                  %ul#features
     .row
       .span
         #back
