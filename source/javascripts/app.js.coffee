@@ -9,7 +9,13 @@
   context.clickElementsHandler = ->
     $("#grid .element").on "click", (event) ->
       sku = $(this).data("sku")
-      window.BCApp.getProduct sku
+      context.getProduct sku
+
+    #back button functinality
+    $("#back a").live "click", (event) ->
+      $("#detail").fadeOut()
+      $("#420block").fadeIn()
+      $(this).unbind('click');
 
   context.templateLoader = (id, obj) ->
     template_id = $(id)
@@ -41,19 +47,19 @@
 
     featuresHTML = ''
     for feature in json.features
+     # console.log feature
       featuresHTML+= context.templateLoader("#detail-feature-template", feature)
     
     imagesHTML = ''
     for obj in json.detailImages
-      obj.nov = obj["900Url"]
+      #console.log obj
+      obj.nov = obj["900Url"] or ""
       delete obj["900Url"]
       imagesHTML+= context.templateLoader("#detail-image-slide-template", obj)
 
     $("#detail #features").html( featuresHTML )
     $("#detail #slideshow").html( imagesHTML )
     cycleProducts($("#detail #slideshow"))
-    window.detail_binds
-
 
 
   context.getProducts =  ->
@@ -64,8 +70,6 @@
       error: (xhr, status, error) ->
         console.error error
       success: (json) ->
-        console.dir json
-        #console.dir json
         context.populateGrid json.products
 
   context.getProduct = (id) ->
@@ -114,7 +118,6 @@
 
 
   context.initFilters = ( brands ) ->
-    console.log "initFilters"
 
    # console.dir brands
 
