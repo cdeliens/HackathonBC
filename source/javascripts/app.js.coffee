@@ -15,6 +15,11 @@
       $("#detail").fadeOut()
       $("#420block").fadeIn()
       $(this).unbind('click');
+    #show Detail text
+    $("#slideshow > ul li img ").live "click",  ->
+      console.log "click click"
+      $("#transparency").fadeIn("fast")
+      $("#mask").slideDown(300)
 
   context.templateLoader = (id, obj) ->
     template_id = $(id)
