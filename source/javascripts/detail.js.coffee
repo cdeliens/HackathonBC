@@ -13,8 +13,6 @@ window.detail_binds = ->
   console.log "detail_binds"
   $("#back a").on "click", (event) ->
     console.log "cick back"
-    $("#detail").fadeOut()
-    $("#detail #slideshow u").empty()
-    $("#detail #features").empty()
+    $("#detail").fadeOut().empty()
     $("#420block").fadeIn()
 
