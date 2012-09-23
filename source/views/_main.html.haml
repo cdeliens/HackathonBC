@@ -1,1 +1,27 @@
-#grid
+.container
+  .row
+    .span9
+      #grid
+    .span3
+      #filters
+        %ul.nav.nav-list.affix
+          %li.active
+            %a{:href => "#!/all"}
+              %i.icon-chevron-right
+              All
+          %li
+            %a{:href => "#!/gender"}
+              %i.icon-chevron-right
+              Gender
+            %ul
+              %li
+                %a{:href => "#!/gender/male"}
+                  %i.icon-chevron-right
+                  Male
+              %li
+                %a{:href => "#!/gender/female"}
+                  %i.icon-chevron-right
+                  Female
+          
+
+            
