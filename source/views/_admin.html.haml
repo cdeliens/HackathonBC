@@ -1,0 +1,46 @@
+.row
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      %a.brand{:href => "#"} 
+      .span.brand
+        Backcountry
+      %ul.nav
+        %li.active
+          %a{:href => "#"} Admin
+        %li
+          %a{id: "reload", :href => "/"} Reload App
+.container
+  .row
+    %form
+    .span6
+      %h1 Setup Query:
+      %p
+        Submit a query
+      .row
+        .span
+          %input{id: "query", :placeholder => "Eyewear", :type => "text"}
+        .span1
+          %button.btn.btn-primary{id: "query-submit", :type => "submit"} Submit
+      .row
+        .span
+          #saved-query
+            %p
+      .row
+        .span
+          .btn.btn-primary#clean
+            Clean Local Storage
+    .span6
+      %h1
+        Instructions:
+      %h3 1 - Setup a Query
+      %h3 2 - Reload App
+  .hr
+  .row
+    .span6
+      %hr
+        %h1
+          Shortcuts:
+        %h4
+          ctrl + a = Toggle between Admin and BC App
+        %h4
+          ctrl + q = Clean Local Storage

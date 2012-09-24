@@ -1,0 +1,186 @@
+@font-face
+  font-family: 'Futura-normal'
+  font-style: normal
+  font-weight: normal
+  src: url('/fonts/futura-webfont.eot')
+  src: url('/fonts/futura-webfont.eot?#iefix') format("embedded-opentype"), url('/fonts/futura-webfont.woff') format("woff")
+
+
+@font-face
+  font-family: 'Futura-bold'
+  font-style: normal
+  font-weight: bold
+  src: url('/fonts/futura-bold-webfont.eot')
+  src: url('/fonts/futura-bold-webfont.eot?#iefix') format("embedded-opentype"), url('/fonts/futura-bold-webfont.woff') format("woff")
+
+$baseBoldFontFamily: 'Futura-bold'
+$baseFontFamily: 'Futura-normal'
+
+@mixin font_builder($font: baseBoldFontFamily, $size: 14px, $weight: normal, $transform: none, $color: black, $style: style)
+  font-family: $font
+  font-size: $size
+  font-weight: $weight
+  text-transform: $transform
+  color: $color 
+  letter-spacing: 0px
+
+body.bc-app
+  h1
+    @include font_builder($font: $baseBoldFontFamily, $size: 32px, $weight: normal, $color: black, $transform: uppercase)
+  h2
+    @include font_builder($font: $baseBoldFontFamily, $size: 24px, $weight: normal, $color: black, $transform: uppercase)
+  h3
+    @include font_builder($font: $baseBoldFontFamily, $size: 19px, $weight: normal, $color: black, $transform: uppercase)
+  h4
+    @include font_builder($font: $baseBoldFontFamily, $size: 14px, $weight: normal, $color: black, $transform: uppercase)
+  .white_font
+    color: white
+  .logo
+    padding: 5px 0px 5px 0px
+    margin-left: 37%
+  .navbar .navbar-inner
+    background: black
+    color: #fff
+    -webkit-box-shadow: 1px 30px 30px rgba(255, 255, 255, 0.21)
+    -moz-box-shadow: 1px 30px 30px rgba(255, 255, 255, 0.21)
+    box-shadow: 1px 30px 30px rgba(255, 255, 255, 0.21)
+#grid
+  border: 0px
+#main-block
+  padding-top: 65px
+  .isotope-item
+    text-align: center
+    width: 217px
+    margin: 5px
+    cursor: pointer
+    display: none
+    float: left
+    img
+      width: 200px 
+
+#admin
+  display: block
+  padding-top: 70px
+  height: 350px !important
+  background: white
+  display: none
+  padding-bottom: 50px
+  border-bottom: 2px solid black
+  -webkit-box-shadow: 0px 31px 30px rgba(50, 50, 50, 0.31)
+  -moz-box-shadow: 0px 31px 30px rgba(50, 50, 50, 0.31)
+  box-shadow: 0px 31px 30px rgba(50, 50, 50, 0.31)
+
+
+/* Sidenav */
+
+#filters
+  .active
+    a
+      color: white !important
+  ul
+    padding: 0 !important
+    background-color: #fff
+    -webkit-border-radius: 6px
+    -moz-border-radius: 6px
+    border-radius: 6px
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065)
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065)
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065)
+    list-style: none
+    margin: 0
+
+    li
+      a
+        @include font_builder($font: $baseBoldFontFamily, $size: 14px, $weight: normal, $color: black, $transform: uppercase)
+        display: block
+        margin: 0 0 -1px
+        padding: 8px 14px
+        border: 1px solid #e5e5e5
+        text-decoration: none
+        cursor: pointer
+
+
+    
+  > 
+    ul 
+      >
+        li
+          &:first-child > a
+            -webkit-border-radius: 6px 6px 0 0
+            -moz-border-radius: 6px 6px 0 0
+            border-radius: 6px 6px 0 0
+          &:last-child > a
+            -webkit-border-radius: 0 0 6px 6px
+            -moz-border-radius: 0 0 6px 6px
+            border-radius: 0 0 6px 6px
+          ul
+            display: none
+        .active 
+          > 
+            a
+              background: black
+              position: relative
+              z-index: 2
+              padding: 9px 15px
+              border: 0
+              text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15)
+              -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1), inset -1px 0 0 rgba(0, 0, 0, 0.1)
+              -moz-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1), inset -1px 0 0 rgba(0, 0, 0, 0.1)
+              box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1), inset -1px 0 0 rgba(0, 0, 0, 0.1)
+
+
+#detail
+  h1
+    font-size: 18px
+    text-align: center
+    display: block
+    margin: 0 auto
+    padding-bottom: 20px
+
+$imgHeight : 420px
+
+#detail-subnav
+  display: block
+  text-align: center
+  padding-top: 15px
+  a
+    font-family: "Futura-bold"
+    font-size: 14px
+    font-weight: normal
+    text-transform: uppercase
+    padding: 0 10px
+    color : #333
+    text-decoration: none
+    cursor: pointer
+    &.active
+      color: #005695
+
+#detail-wrapper
+  position: relative
+  height: $imgHeight
+  overflow: hidden
+  #slideshow
+    ul
+      li
+        height: $imgHeight
+
+  #mask, #transparency, #comments
+    position: absolute
+    top: 0
+    width: 800px
+    height: $imgHeight
+    display: none
+  #transparency
+    opacity: .6
+    background: #fff
+    left: 0
+  #mask, #comments
+    left: 0
+    opacity: 1
+    background: transparent
+    .row 
+      padding-top: 20px
+
+#main-block .isotope-item h4,
+#main-block .isotope-item img 
+  margin-bottom: 15px

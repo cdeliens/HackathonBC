@@ -1,7 +1,31 @@
-.row
-  .container
+#main-block
+  .navbar.navbar-inverse.navbar-fixed-top
+    .navbar-inner
+      .container
+        .span.logo
+          = image_tag "logo.png"
 
-    %h1
-      BC - Hackathon
-      .btn.btn-success
-        TEST
+  =partial '/views/main'
+#detail
+
+#admin
+  .row
+    .container
+      .span
+        = partial "views/admin"
+
+
+%script#item-template{:type => "text/x-handlebars-template"}
+  =partial "/views/jst/item"
+
+%script#detail-template{:type => "text/x-handlebars-template"}
+  =partial "/views/jst/detail"
+
+%script#filter-template{:type => "text/x-handlebars-template"}
+  =partial "/views/jst/filter"
+
+%script#detail-image-slide-template{:type => "text/x-handlebars-template"}
+  =partial "/views/jst/detail_slide"
+
+%script#detail-feature-template{:type => "text/x-handlebars-template"}
+  =partial "/views/jst/detail_feature"
