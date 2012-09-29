@@ -61,16 +61,6 @@
     template = Handlebars.compile(source)
     html = template(obj)
 
-  context.createProductObject = (result) ->
-    {
-      title:  result.title
-      fullDescription: result.fullDescription
-      brandImage: result.brandImage
-      productGroup: result.productGroup
-      bottomLine: result.bottomLine
-    }
-
-
   context.appendToDetail = (el) ->
     $("#420block").fadeOut(300)
     detail = $("#detail")
@@ -79,8 +69,7 @@
       context.eightamhack()
 
   context.handleProduct = (json) ->
-    productObj = context.createProductObject json
-    html = context.templateLoader "#detail-template", productObj
+    html = context.templateLoader "#detail-template", json
     context.appendToDetail(html)
     localStorage.jsonResult = JSON.stringify(json)
 
@@ -92,7 +81,8 @@
       error: (xhr, status, error) ->
         console.error error
       success: (json) ->
-        context.populateGrid json.products
+        console.log json
+        context.populateGrid json.posts
 
   context.getProduct = (id) ->
     $.ajax
@@ -123,7 +113,7 @@
     brands = {}
 
     $.each products, ->
-      #console.log this
+      console.log @
       brands[''+@brand] = {"brand": @brand, "brandName": @brandName}
       itemsHTML += itemTemplate(@)
 

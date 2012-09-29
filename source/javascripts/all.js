@@ -4,4 +4,5 @@
 //= require variables
 //= require handle_bar_helpers
 //= require admin
+//= require spinner_init
 //= require app
