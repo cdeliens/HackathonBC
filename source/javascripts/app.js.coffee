@@ -23,25 +23,25 @@
       
      
 
-  context.eightamhack =  ->
-    json = JSON.parse( localStorage.jsonResult )
-    console.dir json
+  # context.eightamhack =  ->
+  #   json = JSON.parse( localStorage.jsonResult )
+  #   console.dir json
 
-    featuresHTML = ''
-    for feature in json.features
-      featuresHTML+= context.templateLoader("#detail-feature-template", feature)
-    imagesHTML = '' 
-    if !$.isEmptyObject(json.detailImages)  && !(json.detailImages[0]["900Url"] == "")
-      for obj in json.detailImages
-        obj.nov = obj["900Url"] or ""
-        delete obj["900Url"]
-        imagesHTML+= context.templateLoader("#detail-image-slide-template", obj)
-    else
-        imagesHTML+= context.templateLoader("#detail-image-slide-template", {nov: "/images/404.png"})
+  #   featuresHTML = ''
+  #   for feature in json.features
+  #     featuresHTML+= context.templateLoader("#detail-feature-template", feature)
+  #   imagesHTML = '' 
+  #   if !$.isEmptyObject(json.detailImages)  && !(json.detailImages[0]["900Url"] == "")
+  #     for obj in json.detailImages
+  #       obj.nov = obj["900Url"] or ""
+  #       delete obj["900Url"]
+  #       imagesHTML+= context.templateLoader("#detail-image-slide-template", obj)
+  #   else
+  #       imagesHTML+= context.templateLoader("#detail-image-slide-template", {nov: "/images/404.png"})
 
-    $("#detail #features").html( featuresHTML )
-    $("#detail #slideshow > ul").html( imagesHTML )
-    window.mySwipe = new Swipe(document.getElementById('slideshow'));
+  #   $("#detail #features").html( featuresHTML )
+  #   $("#detail #slideshow > ul").html( imagesHTML )
+  #   window.mySwipe = new Swipe(document.getElementById('slideshow'));
 
   context.clickElementsHandler = ->
     console.log "hola"
@@ -66,7 +66,7 @@
     detail = $("#detail")
     detail.fadeIn 300, ->
       $(@).html(el)
-      context.eightamhack()
+      # context.eightamhack()
 
   context.handleProduct = (json) ->
     html = context.templateLoader "#detail-template", json
@@ -93,8 +93,6 @@
         console.error error
       success: (json) ->
         context.handleProduct json
-        
-
 
 
   context.populateGrid = (products) ->
@@ -110,11 +108,11 @@
     #generate items html, filters html and populate the grid
     itemsHTML = ""
     filtersHTML = ""
-    brands = {}
+    brands = new Array()
 
     $.each products, ->
       console.log @
-      brands[''+@brand] = {"brand": @brand, "brandName": @brandName}
+      brands.push({"slug": @categories[0].slug, "title": @categories[0].title}) if @categories.length > 0
       itemsHTML += itemTemplate(@)
 
     context.$grid = $grid = $("#grid")
@@ -125,8 +123,8 @@
       $grid.isotope (itemSelector: ".element"),  ->
         #context.clickElementsHandler
         $("#grid .element").on "click", (event) ->
-          sku = $(this).data("sku")
-          context.getProduct sku
+          id = $(this).data("id")
+          context.getProduct 
 
         #back button functinality
         $("#back a").live "click", (event) ->
@@ -163,6 +161,7 @@
       selector = $(this).attr("data-filter")
       $filterCategories.filter(".active").not(this).removeClass("active")
       $(this).parent().addClass("active")
+      selector = "." + selector
       context.$grid.isotope filter: selector
       
       
